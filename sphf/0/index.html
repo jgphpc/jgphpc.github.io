@@ -1,0 +1,34 @@
+<html>
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="./../css/style.css">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Sphflow@CSCS</title>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <script src="./../js/remark-latest.min.js"></script>
+        <script src="./../js/jquery-3.1.0.js"></script>
+    </head>
+
+    <body>
+        <script>
+            var slideshow = remark.create(
+                {
+                    <!-- sourceUrl: 'README.md', -->
+                    sourceUrl: 'daint.md',
+                    highlightLanguage: 'cpp',
+                    highlightLines: true,
+                    highlightStyle: 'github'
+                }
+            );
+            slideshow.on('afterShowSlide', function (slide) {
+                if ($("div.remark-slide-content").find("div.logo").length == 0)
+                {
+                    var cscs = "<img src=\"./../img/CSCS_2_CMYK.jpg\" class=\"logo-img-cscs\"></img>";
+                    var ethz = "<img src=\"./../img/eth_logo_kurz_pos.jpg\" class=\"logo-img-ethz\"></img>";
+                    var logo = $("<div class=\"logo\">" + cscs + ethz + "</div>")
+                    $("div.remark-slide-content").append(logo);
+                }
+            });
+        </script>
+    </body>
+</html>
