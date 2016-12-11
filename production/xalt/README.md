@@ -1,7 +1,54 @@
 # XALT use cases
 ## cray-hdf5
-### Unused versions ?
 
+| hdf5        | /opt/cray/pe/hdf5/1.10.0/ |  /opt/cray/pe/hdf5/1.8.16/ |
+|-------------|---------------------------| ---------------------------|
+| cce/8.5.x   | CRAY/8.3                  |  CRAY/8.3                  |
+|-------------|---------------------------| ---------------------------|
+| gcc/4.9.x   | GNU/4.9                   |  GNU/4.9                   |
+| gcc/5.3.x   | GNU/5.1                   |  GNU/5.1                   |
+| gcc/6.x     | GNU/5.1                   |  GNU/5.1                   |
+|-------------|---------------------------| ---------------------------|
+| intel/15.x  | INTEL/15.0                |  INTEL/15.0                |
+| intel/16.x  | INTEL/15.0                |  INTEL/15.0                |
+| intel/17.x  | INTEL/15.0                |  INTEL/15.0                |
+|-------------|---------------------------| ---------------------------|
+| pgi/16.4    | PGI/15.3                  |  PGI/15.3                  |
+| pgi/16.5    | PGI/15.3                  |  PGI/15.3                  |
+| pgi/16.7    | PGI/15.3                  |  PGI/15.3                  |
+| pgi/16.9    | PGI/15.3                  |  PGI/15.3                  |
+|-------------|---------------------------| ---------------------------|
+### just compiling 
+* module load daint-gpu cray-hdf5
+* SELECT module_name, object_path, date FROM xalt_link, join_link_object,xalt_object WHERE xalt_link.link_id = join_link_object.link_id AND    join_link_object.obj_id = xalt_object.obj_id AND module_name IS NOT NULL AND module_name="cray-hdf5/1.10.0" AND date>="2016-12-11";
+
+```
++------------------+-------------------------------------------------------------+---------------------+
+| module_name      | object_path                                                 | date                |
++------------------+-------------------------------------------------------------+---------------------+
+| cray-hdf5/1.10.0 | /opt/cray/pe/hdf5/1.10.0/CRAY/8.3/lib/libhdf5_cray.a        | 2016-12-11 16:53:00 |
+| cray-hdf5/1.10.0 | /opt/cray/pe/hdf5/1.10.0/PGI/15.3/lib/libhdf5_pgi.a         | 2016-12-11 16:53:43 |
+| cray-hdf5/1.10.0 | /opt/cray/pe/hdf5/1.10.0/INTEL/15.0/lib/libhdf5_intel_150.a | 2016-12-11 16:53:55 |
+| cray-hdf5/1.10.0 | /opt/cray/pe/hdf5/1.10.0/GNU/5.1/lib/libhdf5_gnu_51.a       | 2016-12-11 16:54:06 |
+
+| cray-hdf5/1.10.0 | /opt/cray/pe/hdf5/1.10.0/GNU/4.9/lib/libhdf5_gnu_49.a       | 2016-12-11 17:39:54 |
+```
+
+* SELECT module_name, object_path, date FROM xalt_link, join_link_object,xalt_object WHERE xalt_link.link_id = join_link_object.link_id AND    join_link_object.obj_id = xalt_object.obj_id AND module_name IS NOT NULL AND module_name="cray-hdf5/1.8.16" AND date>="2016-12-11";
+
+```
++------------------+-------------------------------------------------------------+---------------------+
+| module_name      | object_path                                                 | date                |
++------------------+-------------------------------------------------------------+---------------------+
+| cray-hdf5/1.8.16 | /opt/cray/pe/hdf5/1.8.16/GNU/5.1/lib/libhdf5_gnu_51.a       | 2016-12-11 17:12:31 |
+| cray-hdf5/1.8.16 | /opt/cray/pe/hdf5/1.8.16/INTEL/15.0/lib/libhdf5_intel_150.a | 2016-12-11 17:12:38 |
+| cray-hdf5/1.8.16 | /opt/cray/pe/hdf5/1.8.16/PGI/15.3/lib/libhdf5_pgi.a         | 2016-12-11 17:12:38 |
+| cray-hdf5/1.8.16 | /opt/cray/pe/hdf5/1.8.16/CRAY/8.3/lib/libhdf5_cray.a        | 2016-12-11 17:12:39 |
+```
+
+
+
+### Unused versions ?
 * SELECT DISTINCT SUBSTRING_INDEX(xo.module_name,'/',1) AS Modules, SUBSTRING_INDEX(xo.module_name,'/',-1) as Versions FROM xalt_object xo where SUBSTRING_INDEX(xo.module_name,'/',1)="`cray-hdf5`";
 
 ```
@@ -165,13 +212,50 @@ print('Hello world!')
 ```
 
 
+---
+# Most used compiler ?
+
+* python compiler_usage.py dom    (BUG)
+
+```
+=============================================================
+               Link Program            # Inst.
+=============================================================
+                                gcc       3743
+                                g++       1221
+                           gfortran        244
+                              ifort        123
+                          driver.cc         65
+                                icc         53
+                               icpc         44
+                     ftn_driver.exe         30
+                               pgcc         20
+                              pgf90         18
+                              pgc++         16
+                          configure          2
+                           pgacclnk          1
+
+```
 
 
 
+---
+# hellolib
+* module load hellolib
+* ftn -g  -I$EBROOTHELLOLIB/include _main.F90  
+-o $PE_ENV.exe -L$EBROOTHELLOLIB/lib -lhello_$PE_ENV
+* SELECT module_name, object_path, date FROM xalt_link, join_link_object,    xalt_object WHERE xalt_link.link_id = join_link_object.link_id AND    join_link_object.obj_id = xalt_object.obj_id AND module_name IS NOT NULL AND date>="2016-12-11" AND SUBSTRING_INDEX(module_name,'/',1)="hellolib";
 
-
-
-
+```
++--------------------------------+----------------------------------------------------------------------------------------------------+---------------------+
+| module_name                    | object_path                                                                                        | date                |
++--------------------------------+----------------------------------------------------------------------------------------------------+---------------------+
+| hellolib/1.0-CrayGNU-2016.11   | /users/piccinal/easybuild/dom/haswell/software/hellolib/1.0-CrayGNU-2016.11/lib/libhello_GNU.a     | 2016-12-11 19:16:24 |
+| hellolib/1.0-CrayIntel-2016.11 | /users/piccinal/easybuild/dom/haswell/software/hellolib/1.0-CrayIntel-2016.11/lib/libhello_INTEL.a | 2016-12-11 19:16:42 |
+| hellolib/1.0-CrayPGI-2016.11   | /users/piccinal/easybuild/dom/haswell/software/hellolib/1.0-CrayPGI-2016.11/lib/libhello_PGI.a     | 2016-12-11 19:16:54 |
+| hellolib/1.0-CrayCCE-2016.11   | /users/piccinal/easybuild/dom/haswell/software/hellolib/1.0-CrayCCE-2016.11/lib/libhello_CRAY.a    | 2016-12-11 19:17:04 |
++--------------------------------+----------------------------------------------------------------------------------------------------+---------------------+
+```
 
 
 
