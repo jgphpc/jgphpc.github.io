@@ -94,8 +94,8 @@ mvapich2gdr_gnu/2.2_cuda_7.5  (/opt/mvapich2 = OSU)
 * /opt/mvapich2 (OSU/CSCS)
 
 ```
-craype-haswell
-craype-network-infiniband
+module purge 
+module load craype-haswell craype-network-infiniband
 mvapich2gdr_gnu/2.2_cuda_7.5 or mvapich2gdr_gnu/2.2a_cuda_7.0
     cudatoolkit/7.5.18       or cudatoolkit/7.0.28
     GCC/4.9.3-binutils-2.25
