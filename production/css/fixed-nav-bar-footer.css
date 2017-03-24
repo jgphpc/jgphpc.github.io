@@ -4,14 +4,14 @@ html {
 }
 body {
   /*padding-top: 60px;*/
-  margin-bottom: 220px;
+  margin-bottom: 230px;
 }
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 200px;
+  height: 210px;
   background-color: #f5f5f5;
   padding-top: 20px;
   padding-bottom: 20px;
@@ -23,9 +23,24 @@ body > .container {
   margin: 20px 0;
 }
 
+#cscs-markdown-content {
+  text-align: justify;
+}
+
+pre code {
+  white-space: pre;
+  word-wrap: normal;
+  overflow: scroll;
+}
+
 .footer > .container {
   padding-right: 15px;
   padding-left: 15px;
+}
+
+blockquote {
+  background-color: #d9edf7;
+  border-left: 5px solid #5286BF;
 }
 
 .cscs-nav-logo {
@@ -103,8 +118,8 @@ body > .container {
   text-decoration: none;
   font-size: 14px;
   margin: 5px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   padding-right: 8px;
   padding-left: 5px;
 }
@@ -113,8 +128,8 @@ body > .container {
   clear: both;
   text-decoration: none;
   font-size: 14px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 20px;
@@ -125,8 +140,8 @@ body > .container {
   clear: both;
   text-decoration: none;
   font-size: 14px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 30px;
@@ -137,8 +152,8 @@ body > .container {
   clear: both;
   text-decoration: none;
   font-size: 14px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 40px;
@@ -149,8 +164,8 @@ body > .container {
   clear: both;
   text-decoration: none;
   font-size: 14px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 50px;
@@ -161,8 +176,8 @@ body > .container {
   clear: both;
   text-decoration: none;
   font-size: 14px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   padding-top: 5px;
   padding-bottom: 10px;
   padding-left: 60px;
